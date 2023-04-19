@@ -1,19 +1,12 @@
 package uz.pdp.springadvanced.post;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import uz.pdp.springadvanced.post.dto.CommentCreateDTO;
-import uz.pdp.springadvanced.post.dto.CommentDTO;
 import uz.pdp.springadvanced.post.dto.PostCreateDTO;
 import uz.pdp.springadvanced.post.dto.PostDTO;
-import uz.pdp.springadvanced.resource.CommentResource;
+import uz.pdp.springadvanced.resource.CommentClient;
 
 import java.util.List;
 
@@ -21,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
-    private final CommentResource commentResource;
+    private final CommentClient commentClient;
 
 
     @Override
@@ -32,7 +25,7 @@ public class PostServiceImpl implements PostService {
                 .id(post.getId())
                 .title(post.getTitle())
                 .body(post.getBody())
-                .comments(commentResource.getAllComments(post.getId()))
+                .comments(commentClient.saveAllComments(post.getId()))
                 .build();
     }
 
@@ -52,6 +45,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void createComment(@NonNull List<CommentCreateDTO> dtos) {
-        commentResource.saveAll(dtos);
+        commentClient.saveAllComments(dtos);
     }
 }
