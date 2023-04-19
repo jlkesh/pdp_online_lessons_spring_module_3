@@ -4,12 +4,10 @@ package uz.pdp.springadvanced.post;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import uz.pdp.springadvanced.post.dto.CommentCreateDTO;
-import uz.pdp.springadvanced.post.dto.PostCreateDTO;
-import uz.pdp.springadvanced.post.dto.PostDTO;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @Slf4j
@@ -20,19 +18,9 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostDTO> getPost(@PathVariable Integer id) {
+    public ResponseEntity<Post> getPost(@PathVariable Integer id) throws Exception {
         return ResponseEntity.ok(postService.getPost(id));
     }
 
-    @PostMapping
-    public ResponseEntity<PostDTO> createPost(@RequestBody PostCreateDTO dto) {
-        return ResponseEntity.ok(postService.createPost(dto));
-    }
-
-    @PostMapping("/comment")
-    public ResponseEntity<Void> createComments(@RequestBody List<CommentCreateDTO> dtos) {
-        postService.createComment(dtos);
-        return ResponseEntity.noContent().build();
-    }
 
 }

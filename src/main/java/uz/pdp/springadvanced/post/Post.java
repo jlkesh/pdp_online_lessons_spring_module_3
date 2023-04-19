@@ -1,23 +1,19 @@
 package uz.pdp.springadvanced.post;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+import java.io.Serializable;
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-public class Post {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Post implements Serializable {
     private Integer id;
     private String title;
     private String body;
-
+    private Integer userId;
 }
