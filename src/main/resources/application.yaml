@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: 'jdbc:postgresql://localhost:5432/pdpmigration?currentSchema=sb_flyway'
+    url: 'jdbc:postgresql://localhost:5432/pdpmigration?currentSchema=sb_liquibase'
     username: postgres
     password: 123
     driver-class-name: org.postgresql.Driver
-
-  flyway:
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
     enabled: true

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <!--<include file="db/changelog/changesets/00001_create_table_tasks.xml" />
+    <include file="db/changelog/changesets/00002_alter_table_add_column.xml" />
+    <include file="db/changelog/changesets/00003_insert_data_to_table_tasks.xml" />
+    <include file="db/changelog/changesets/00004_alter_column_to_table_tasks.xml" />-->
+    <includeAll path="db/changelog/changesets/"/>
+</databaseChangeLog>

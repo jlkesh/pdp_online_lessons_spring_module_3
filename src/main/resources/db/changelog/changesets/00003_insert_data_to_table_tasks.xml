@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="00003" author="Javohir">
+        <insert tableName="tasks">
+            <column name="name" value="Read A Book" />
+            <column name="description" value="Read About Kafka"/>
+        </insert>
+        <sql>
+            insert into tasks (name, description)
+            values ('Read About Enterprise Design Patterns', 'Read About Sup/Pub');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

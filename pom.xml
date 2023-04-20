@@ -37,9 +37,9 @@
             <version>42.5.4</version>
         </dependency>
         <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>9.16.3</version>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>4.17.2</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
@@ -68,32 +68,6 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>9.16.3</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>undo</goal>
-                            <goal>info</goal>
-                            <goal>migrate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <url>jdbc:postgresql://localhost:5432/pdpmigration?currentSchema=sb_flyway</url>
-                    <driver>org.postgresql.Driver</driver>
-                    <user>postgres</user>
-                    <password>123</password>
-                    <baselineOnMigrate>true</baselineOnMigrate>
-                    <schemas>sb_flyway</schemas>
-                    <locations>
-                        <location>classpath:db/migration/</location>
-                    </locations>
                 </configuration>
             </plugin>
         </plugins>
