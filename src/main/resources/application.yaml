@@ -1,7 +1,7 @@
 
 spring:
   datasource:
-    url: jdbc:h2:file:./db
+    url: jdbc:h2:mem:~
     username: sa
     password: sa
   jpa:
@@ -11,21 +11,3 @@ spring:
     properties:
       hibernate:
         format_sql: true
-comments:
-  url:
-    base: http://localhost:9595/api/comments
-    postComments: ${comments.url.base}/{0}/post
-    saveComments: ${comments.url.base}/saveAll
-logging:
-  level:
-    org.zalando.logbook : trace
-    org:
-      springframework:
-        web:
-          client:
-            RestTemplate: trace
-logbook:
-  exclude:
-    - /api/posts/comment
-    - /api/upload
-    - /api/download

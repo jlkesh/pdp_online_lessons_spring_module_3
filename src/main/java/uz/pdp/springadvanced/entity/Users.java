@@ -1,4 +1,4 @@
-package uz.pdp.springadvanced.post;
+package uz.pdp.springadvanced.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,16 +8,18 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Builder
 @Entity
-public class Post {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String title;
-    private String body;
-
+    private String email;
+    private String username;
+    private String password;
+    private String otp;
 }
