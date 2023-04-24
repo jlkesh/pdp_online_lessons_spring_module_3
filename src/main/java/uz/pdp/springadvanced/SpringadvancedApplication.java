@@ -8,20 +8,26 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import uz.pdp.springadvanced.entity.Post;
 import uz.pdp.springadvanced.repository.PostRepository;
 
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 @RequiredArgsConstructor
 @Slf4j
 @EnableCaching
+@EnableScheduling
 public class SpringadvancedApplication {
 
 
@@ -40,11 +46,10 @@ public class SpringadvancedApplication {
     }
 
 
-    @Bean
-    public CacheManager cacheManager() {
-        ConcurrentMapCacheManager concurrentMapCacheManager = new ConcurrentMapCacheManager();
-        concurrentMapCacheManager.setCacheNames(List.of("posts", "users", "comments"));
-        return concurrentMapCacheManager;
+    @CacheEvict(value = "posts", allEntries = true)
+    @Scheduled(initialDelay = 8, fixedDelay = 4, timeUnit = TimeUnit.SECONDS)
+    public void deleteAllCachedPosts() {
+        log.info("All Entries Of Posts Cache Flushing");
     }
 
 }

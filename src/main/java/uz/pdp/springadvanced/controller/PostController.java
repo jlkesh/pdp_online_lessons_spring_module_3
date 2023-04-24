@@ -8,6 +8,7 @@ import uz.pdp.springadvanced.dto.PostUpdateDTO;
 import uz.pdp.springadvanced.entity.Post;
 import uz.pdp.springadvanced.service.PostService;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
@@ -26,10 +27,16 @@ public class PostController {
         return postService.get(id);
     }
 
+    @GetMapping
+    public List<Post> getAll() {
+        return postService.getAll();
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         postService.delete(id);
     }
+
     @PutMapping
     public void update(@RequestBody PostUpdateDTO dto) {
         postService.update(dto);
