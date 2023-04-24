@@ -44,14 +44,6 @@ public class SpringadvancedApplication {
             postRepository.saveAll(posts);
         });
     }
-
-
-    @CacheEvict(value = "posts", allEntries = true)
-    @Scheduled(initialDelay = 8, fixedDelay = 4, timeUnit = TimeUnit.SECONDS)
-    public void deleteAllCachedPosts() {
-        log.info("All Entries Of Posts Cache Flushing");
-    }
-
 }
 
 

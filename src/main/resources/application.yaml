@@ -11,3 +11,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  cache:
+    redis:
+      time-to-live: 10m
+  data:
+    redis:
+      host: localhost
+      port: 6379
