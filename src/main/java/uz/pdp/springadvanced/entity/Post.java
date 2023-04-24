@@ -13,13 +13,12 @@ import lombok.*;
 @ToString
 @Builder
 @Entity
-public class Users {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String email;
-    private String username;
-    private String password;
-    private String otp;
+    private Integer userId;
+    private String title;
+    private String body;
 }

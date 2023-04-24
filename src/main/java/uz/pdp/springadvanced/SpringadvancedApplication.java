@@ -1,46 +1,49 @@
 package uz.pdp.springadvanced;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
-import uz.pdp.springadvanced.service.CacheService;
-import uz.pdp.springadvanced.service.MailService;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.context.annotation.Bean;
+import uz.pdp.springadvanced.entity.Post;
+import uz.pdp.springadvanced.repository.PostRepository;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 
 @SpringBootApplication
-@EnableAsync
-@EnableScheduling
 @RequiredArgsConstructor
 @Slf4j
+@EnableCaching
 public class SpringadvancedApplication {
 
-    private final CacheService cacheService;
-    private final MailService mailService;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringadvancedApplication.class, args);
     }
 
 
-    @Scheduled(initialDelay = 5, fixedDelay = 60, timeUnit = TimeUnit.SECONDS)
-    public void sendCachedVerificationMails() {
-        if (mailService.isSMTPActive()) {
-            ConcurrentHashMap<Object, Map<Object, Object>> cache = cacheService.getCache();
-            cache.forEach((k, value) -> {
-                mailService.sendVerificationMail(value);
-                cache.remove(k);
+    @Bean
+    public ApplicationRunner applicationRunner(ObjectMapper objectMapper, PostRepository postRepository) {
+        return (args -> {
+            List<Post> posts = objectMapper.readValue(new URL("https://jsonplaceholder.typicode.com/posts"), new TypeReference<>() {
             });
-        } else {
-            log.info("SMTP server is off");
-        }
+            postRepository.saveAll(posts);
+        });
     }
 
 
+
+
 }
+
+
+
+
