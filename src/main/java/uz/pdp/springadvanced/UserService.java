@@ -1,5 +1,7 @@
 package uz.pdp.springadvanced;
 
+import lombok.NonNull;
+
 import java.util.Optional;
 
 public class UserService {
@@ -12,7 +14,8 @@ public class UserService {
     }
 
 
-    public User create(User user) {
+    public User create(@NonNull User user) {
+
         String email = user.getEmail();
 
         Optional<User> userOptional;
@@ -24,7 +27,7 @@ public class UserService {
 
         String username = user.getUsername();
 
-        userOptional = userRepository.findByEmail(username);
+        userOptional = userRepository.findByUsername(username);
 
         if (userOptional.isPresent())
             throw new RuntimeException("Username already taken: " + username);
