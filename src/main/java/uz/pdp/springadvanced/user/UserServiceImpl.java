@@ -34,12 +34,4 @@ public class UserServiceImpl implements UserService {
     public void delete(Integer id) {
         userRepository.deleteById(id);
     }
-
-    public User update(Integer id, UserUpdateDTO dto) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with ID : " + id));
-        user.setEmail(dto.getEmail());
-        user.setUsername(dto.getUsername());
-        return userRepository.save(user);
-    }
 }

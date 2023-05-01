@@ -8,6 +8,4 @@ public interface UserService {
     User get(@NonNull Integer id);
 
     void delete(Integer id);
-
-    User update(Integer id, UserUpdateDTO dto);
 }
