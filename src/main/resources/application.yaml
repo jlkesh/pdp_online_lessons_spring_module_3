@@ -4,3 +4,11 @@ logging:
 spring:
   main:
     banner-mode: off
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gdb
+    username: postgres
+    password: 123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate.ddl-auto: create-drop
+    show-sql: true
