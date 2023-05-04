@@ -38,7 +38,7 @@ class UserController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Integer id) {
+    public void delete(@PathVariable Integer id) {
         userRepository.deleteById(id);
     }
 
